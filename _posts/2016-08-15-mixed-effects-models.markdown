@@ -10,9 +10,11 @@ https://cran.r-project.org/web/packages/squid/squid.pdf
 
 For those of you I've sent here that are not acquainted with R Studio, run the following in R:
 
-`install.packages("squid")`\n
-`library(squid)`\n
-`squidApp()`\n
+`install.packages("squid")`
+
+`library(squid)`
+
+`squidApp()`
 
 A new browser window will open with the interactive tutorial.
 
