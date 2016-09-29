@@ -10,4 +10,8 @@ One approach might be to make use of a Kalman Filter (or some variant thereof). 
 
 Most of the articles and tutorials on Kalman Filtering that I've seen have been a bit dense, but this one hits the sweet spot for me -
 
-[link](http://www.magesblog.com/2015/01/kalman-filter-example-visualised-with-r.html "Kalman Filter visualised with R")
+[A first look at the Kalman Filter](http://lectures.quantecon.org/jl/kalman.html "A first look at the Kalman Filter")
+
+...and conveniently someone has put some R code up on gitub
+
+[Kalman Filter visualised with R](https://gist.github.com/mages/52cf15bf8c9563c3518f "Kalman Filter visualised with R")
