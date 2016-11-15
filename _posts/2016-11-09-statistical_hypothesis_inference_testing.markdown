@@ -6,7 +6,7 @@ layout: post
 ---
 
 As a newly minted statistician working in a busy, multi-disciplinary lab I'm quickly discovering how an undergraduate degree in statistics just scratches the surface of many problems that require deeper attention if a statistician is to add any value (other than "help desk" duties) to working scientists. Many of the issues that we are asked to address require some degree of compromise (or discomfort, or even contradiction...) We defend null-hypothesis statistical testing partly by acknowledging the epistemological issues that it inherits, or even raises - but sometimes we defend it against misperceptions about the process itself or how to interpret the results. In an effort to find better ways to communicate statistical ideas I came across an accessible and to-the-point essay by Greenland et. al (2016) which aims to address misinterpretations of statistical tests, P values, confidence intervals and power. I have summarised some key points below mostly for my own benefit. The essay is concise and worth reading, so if you wish to go straight to the source, follow this link: https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4877414/pdf/10654_2016_Article_149.pdf
-
+[follow this link.]( https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4877414/pdf/10654_2016_Article_149.pdf "down the rabbit hole")
 
 - statistical inference depends on assumptions about how data were collected, analysed, and presented
 - these assumptions are embodied in a statistical model
