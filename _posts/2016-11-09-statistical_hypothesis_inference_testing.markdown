@@ -21,5 +21,6 @@ As a newly minted statistician working in a busy, multi-disciplinary lab I'm qui
 
 
 *References*
+
 Greenland et al., (2016) "Statistical tests, P values, confidence intervals, and power: a guide
 to misinterpretations" European Journal of Epidemiology 31:337-350
