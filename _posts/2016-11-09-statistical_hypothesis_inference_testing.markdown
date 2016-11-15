@@ -1,6 +1,6 @@
 ---
 published: true
-title: Statistical tests, P values, confidence intervals, and power: a guide to misinterpretations
+title: Statistical tests, P values, confidence intervals, and power
 layout: post
 ---
 
