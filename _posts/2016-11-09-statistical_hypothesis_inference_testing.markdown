@@ -16,7 +16,7 @@ As a newly minted statistician working in a busy, multi-disciplinary lab I'm qui
 - The P value on its own (whether big or small) does not tell us which assumptions are incorrect or correct (i.e it does not necessarily tell us that we can reject the null), and is more correctly interpreted as a measure of the agreement between the data and the model used to compute the P value.
 - The P value is computed *from* a set of assumptions, so it can never refer to the *probability of those assumptions*; thus it is incorrect to say that because you computed p = 0.01 there is a 1% probability that chance alone produced the observed association. Rather, if *chance alone* produced the discrepancy in our model (e.g an observed difference between test and treatment groups under the null hypothesis) we would expect to see this difference (or larger) no more than 1% of the time. If that seems like a subtle difference - read it again!
 - Unless p = 1, there is *some* effect or association so it is incorrect to conclude that there is no effect or association just because p > 0.05. To me, this seems like a laboursome and inconvenient point, but it should not be ignored, and in fact I would deliberately include statements about the difference between two (or more) means in its scope.
-- Why report confidence intervals? While a P value can be considered a measure of how well the data fits the model (and thus flag any discrepancies, for example under the null hypothesis), CIs reflect the range of effect sizes compatible with the data. There is some evidence that this helps researchers to make better interpretations, moving from "dichotomous thinking" to "estimation thinking" http://journal.frontiersin.org/article/10.3389/fpsyg.2010.00026/full
+- Why report confidence intervals? While a P value can be considered a measure of how well the data fits the model (and thus flag any discrepancies, for example under the null hypothesis), CIs reflect the range of effect sizes compatible with the data. There is some evidence that this helps researchers to make better interpretations, moving from ["dichotomous thinking" to "estimation thinking"](http://journal.frontiersin.org/article/10.3389/fpsyg.2010.00026/full "free your mind")
 - If two studies both have 80% power to show p <= .05, the probability that one is significant and the other isn't is 0.8*(1-0.8) + (1-0.8)*0.8 = 0.32. Roughly 1/3rd of the time - can anyone say "replication crisis"?
 
 
@@ -24,3 +24,5 @@ As a newly minted statistician working in a busy, multi-disciplinary lab I'm qui
 
 Greenland et al., (2016) "Statistical tests, P values, confidence intervals, and power: a guide
 to misinterpretations" European Journal of Epidemiology 31:337-350
+
+Coulson et al., (2010) "Confidence intervals permit, but do not guarantee, better inference than statistical significance testing" Frontiers in Psychology
