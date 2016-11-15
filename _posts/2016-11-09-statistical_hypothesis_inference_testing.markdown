@@ -1,7 +1,7 @@
 ---
 published: true
 title: Key points from "Statistical tests, P values, confidence intervals, and power: a guide
-to misinterpretations" (Greenland et al., 2016)
+to misinterpretations"
 layout: post
 ---
 
