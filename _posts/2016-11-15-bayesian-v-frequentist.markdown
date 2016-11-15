@@ -21,7 +21,10 @@ Results rely on assumption that data were from a controlled experiment (often no
 ***Note:** many people mistakenly believe that the Bayesian interpretation of the 95% Credibility Interval is how the 95%CI should be interpreted in frequentist statistics.
 
 *References*
+
 Casella, G. http://www.stat.ufl.edu/archived/casella/Talks/BayesRefresher.pdf
+
 Goddard, M. http://jvanderw.une.edu.au/Introduction_to_Bayesian_Statistics1.pdf
+
 Gelman, A. et al. Bayesian Data Analysis (3rd Ed)  CRC Press, Fl. USA
 
