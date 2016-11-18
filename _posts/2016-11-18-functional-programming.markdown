@@ -47,21 +47,5 @@ which is essentially 1-(a %in% b) returned as a vector of logicals. More artfull
 
 [1] 1
 
-Negate() exists because something like this won't work-
-
-> negate <- function(x){ return(as.logical(1-x))}
-
-> \`%notin%\` <- negate(\`%in%\`)
-
-Error in 1 - x : non-numeric argument to binary operator
-
-
-
-...even though this does work-
-
-> negate(a %in% b)
-
-[1]  TRUE FALSE FALSE
-
 
 
