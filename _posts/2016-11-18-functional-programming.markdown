@@ -14,8 +14,7 @@ R is a *functional* language, and it is useful to think of functions in R like y
 
 ...and some potentially useful things...
 
-We want to find any elements of a not also in b
-finding elements of a that are in b is easy
+We want to find any elements of a not also in b. Finding elements of a that are in b is easy:
 
 > a <- c(1,2,3)
 
@@ -30,15 +29,13 @@ finding elements of a that are in b is easy
 [1] 2 3
 
 
-a concise solution is
+A concise solution to find elements of a not in b is:
 
 > !(a %in% b)
 
 [1]  TRUE FALSE FALSE
 
-which is essentially 1-(a %in% b) returned as a vector of logicals
-
-More artfully we might do this 
+which is essentially 1-(a %in% b) returned as a vector of logicals. More artfully we might do this 
 
 > \`%notin%\` <- Negate(\`%in%\`)
 
@@ -50,7 +47,7 @@ More artfully we might do this
 
 [1] 1
 
-Negate() exists because something like this won't work
+Negate() exists because something like this won't work-
 
 > negate <- function(x){ return(as.logical(1-x))}
 
@@ -60,7 +57,7 @@ Error in 1 - x : non-numeric argument to binary operator
 
 
 
-...even though this does work
+...even though this does work-
 
 > negate(a %in% b)
 
