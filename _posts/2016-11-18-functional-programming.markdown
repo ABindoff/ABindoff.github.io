@@ -8,7 +8,7 @@ R is a *functional* language, and it is useful to think of functions in R like y
 
 > \`+\` <- \`-\`
 > 2 + 3
--1
+\n-1
 
 ...and some potentially useful things...
 
@@ -18,13 +18,13 @@ finding elements of a that are in b is easy
 > a <- c(1,2,3)
 > b <- c(2,3,4)
 > a %in% b
-[1] FALSE  TRUE  TRUE
+\n[1] FALSE  TRUE  TRUE
 > a[a %in% b]
-[1] 2 3
+\n[1] 2 3
 
 
 a concise solution is
-> !(a %in% b)
+\n> !(a %in% b)
 
 [1]  TRUE FALSE FALSE
 
