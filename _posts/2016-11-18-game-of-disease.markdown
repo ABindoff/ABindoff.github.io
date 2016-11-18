@@ -1,6 +1,6 @@
 ---
 published: true
-title: Can life (or disease) emerge from simple rule structures
+title: Can life (or disease) emerge from simple rule structures?
 layout: post
 ---
 
