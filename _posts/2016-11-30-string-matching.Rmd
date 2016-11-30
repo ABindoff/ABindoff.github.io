@@ -1,5 +1,5 @@
 ---
-published: fales
+published: false
 title: Quick'n'dirty string categorization using the stringdist library
 layout: post
 ---
