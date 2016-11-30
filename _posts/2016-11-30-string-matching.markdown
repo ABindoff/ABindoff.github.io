@@ -1,5 +1,5 @@
 ---
-published: fales
+published: true
 title: Quick'n'dirty string categorization using the stringdist library
 layout: post
 ---
@@ -12,7 +12,7 @@ The algorithm takes a list of strings `a` and attempts to match each item from `
 
 I recommend converting each list to lower-case first.
 
-```{r, echo = T, message = F}
+```{r, echo = T}
 require(stringdist)
 
 fuzzy_match <- function(a, b, method = c("jw","dl","lcs","soundex")){  
@@ -33,14 +33,5 @@ fuzzy_match <- function(a, b, method = c("jw","dl","lcs","soundex")){
   }
   k <- k[-1,]  # get rid of the first [empty] row
 }
-```
 
-```{r, message = F}
-k1 <- fuzzy_match(c("apple", "bears", "peasr", "bees", "raeb", "frappe"), c("apple", "bear", "pear", "donkey"), method = "jw")
-k2 <- fuzzy_match(c("apple", "bears", "peasr", "bees", "raeb", "frappe"), c("apple", "bear", "pear", "donkey"), method = "dl")
-require(knitr)
-kable(k1)
-kable(k2)
-```
-
-Where the `score` exceeds some sensible threshold, rows with an `other` response can then be updated with the new category.
+[A Hitch-hikers Guide to Auto-Differentiation (Hoffman, 2016)](https://arxiv.org/pdf/1411.0583v5.pdf "Guide to AD")
