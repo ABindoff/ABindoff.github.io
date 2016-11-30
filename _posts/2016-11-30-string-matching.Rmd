@@ -12,7 +12,7 @@ The algorithm takes a list of strings `a` and attempts to match each item from `
 
 I recommend converting each list to lower-case first.
 
-```{r, echo = T, message = F}
+```{r, echo = T, message = F, warning = F}
 require(stringdist)
 
 fuzzy_match <- function(a, b, method = c("jw","dl","lcs","soundex")){  
@@ -35,7 +35,7 @@ fuzzy_match <- function(a, b, method = c("jw","dl","lcs","soundex")){
 }
 ```
 
-```{r, message = F}
+```{r, message = F, warning = F}
 k1 <- fuzzy_match(c("apple", "bears", "peasr", "bees", "raeb", "frappe"), c("apple", "bear", "pear", "donkey"), method = "jw")
 k2 <- fuzzy_match(c("apple", "bears", "peasr", "bees", "raeb", "frappe"), c("apple", "bear", "pear", "donkey"), method = "dl")
 require(knitr)

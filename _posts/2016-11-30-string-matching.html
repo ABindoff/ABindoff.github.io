@@ -124,9 +124,9 @@ $(document).ready(function () {
 <p>During a recent project it was important for me to identify occupation types stored in a very large database generated from a web enrolment form. For whatever reason, a very large proportion of users selected <code>other</code> then entered their occupation as text rather than choosing it from an adaptive form. Many of these <code>other</code> responses appeared to match existing categories very closely, so rather than discarding the <code>other</code> responses I thought it was worth my time to hack a quick algorithm to sort these responses into existing categories where possible.</p>
 <p>The algorithm takes a list of strings <code>a</code> and attempts to match each item from <code>a</code> against each item in a list of strings <code>b</code>. The best match is stored, with the intention that those with a high enough similarity will be classified according to their best match in <code>b</code>. In this example, the list <code>a</code> is all of the strings from the <code>other</code> text responses and the list <code>b</code> is all of the strings from the database-specified list of occupations.</p>
 <p>I recommend converting each list to lower-case first.</p>
-<pre class="r"><code>require(stringdist)</code></pre>
-<pre><code>## Warning: package 'stringdist' was built under R version 3.3.2</code></pre>
-<pre class="r"><code>fuzzy_match &lt;- function(a, b, method = c(&quot;jw&quot;,&quot;dl&quot;,&quot;lcs&quot;,&quot;soundex&quot;)){  
+<pre class="r"><code>require(stringdist)
+
+fuzzy_match &lt;- function(a, b, method = c(&quot;jw&quot;,&quot;dl&quot;,&quot;lcs&quot;,&quot;soundex&quot;)){  
   k &lt;- data.frame(NA,NA,NA)
   names(k) &lt;- c(&quot;score&quot;, &quot;a&quot;, &quot;b&quot;)
   
@@ -146,9 +146,8 @@ $(document).ready(function () {
 }</code></pre>
 <pre class="r"><code>k1 &lt;- fuzzy_match(c(&quot;apple&quot;, &quot;bears&quot;, &quot;peasr&quot;, &quot;bees&quot;, &quot;raeb&quot;, &quot;frappe&quot;), c(&quot;apple&quot;, &quot;bear&quot;, &quot;pear&quot;, &quot;donkey&quot;), method = &quot;jw&quot;)
 k2 &lt;- fuzzy_match(c(&quot;apple&quot;, &quot;bears&quot;, &quot;peasr&quot;, &quot;bees&quot;, &quot;raeb&quot;, &quot;frappe&quot;), c(&quot;apple&quot;, &quot;bear&quot;, &quot;pear&quot;, &quot;donkey&quot;), method = &quot;dl&quot;)
-require(knitr)</code></pre>
-<pre><code>## Warning: package 'knitr' was built under R version 3.3.2</code></pre>
-<pre class="r"><code>kable(k1)</code></pre>
+require(knitr)
+kable(k1)</code></pre>
 <table>
 <thead>
 <tr class="header">
