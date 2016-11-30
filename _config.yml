@@ -1,5 +1,5 @@
 excerpt_separator: ""
-pygments: true
+pygments: false
 markdown: kramdown
 url: http://ABindoff.github.io
 title: noise and other obscurations
