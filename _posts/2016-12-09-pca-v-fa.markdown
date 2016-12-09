@@ -1,0 +1,9 @@
+---
+published: false
+title: PCA vs FA
+layout: post
+---
+
+http://www2.sas.com/proceedings/sugi30/203-30.pdf
+http://www2.sas.com/proceedings/sugi31/200-31.pdf
+http://www.statisticssolutions.com/spss-manual/
