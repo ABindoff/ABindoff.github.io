@@ -1,0 +1,119 @@
+---
+published: false
+title: Power and unbalanced data
+layout: post
+---
+
+```{r, echo = F, message = F, warning = F}
+library(lme4)
+generate_sample <- function(prop_c = prop_c, prop_pp = prop_pp, N = N, diff = diff, s.d = s.d, mu = mu){
+  N_cc <- floor(prop_c*N)
+  N_pre <- round((N-N_cc*2)*prop_pp, 0)
+  N_post <- N - N_cc*2 - N_pre
+  poss_id <- c(1:N)
+  id <- sample(poss_id, N_pre + N_post)
+  id_r <- sample(poss_id[-id], N_cc)
+  y_pre <- mu + rnorm(N_pre, 0, s.d)
+  y_post <- mu*diff + rnorm(N_post, 0, s.d)
+  y_cc_pre <- mu + rnorm(N_cc, 0, s.d)
+  y_cc_post <- mu*diff + rnorm(N_cc, 0, s.d)
+  Y <- list(data.frame(c(id, id_r, id_r), c(y_pre, y_post, y_cc_pre, y_cc_post),
+                  c(rep(0,N_pre), rep(1, N_post), rep(0, N_cc), rep(1, N_cc))),
+            data.frame(c(id), c(y_pre, y_post),
+                       c(rep(0,N_pre), rep(1, N_post))),
+            data.frame(c(id_r, id_r), c(y_cc_pre, y_cc_post),
+                       c(rep(0, N_cc), rep(1, N_cc))))
+  names(Y[[1]]) <- c("id", "score", "time")  ## all data (unbalanced and non-independent)
+  names(Y[[2]]) <- c("id", "score", "time")  ## unbalanced, independent samples
+  names(Y[[3]]) <- c("id", "score", "time")  ## balanced RM design, complete cases
+  
+  return(Y)
+}
+
+prop_c <- 0.3    ## proportion of COMPLETE CASES to INCOMPLETE CASES, where 0 < prop_c < 1
+prop_pp <- 0.4    ## proportion of PRE-TEST scores to POST-TEST scores, where 0 < prop_pp < 1
+N <- as.integer(500)   ## N is the NUMBER OF OBSERVATIONS (not the number of unique participants)
+diff <- 1.05       ## mean difference between post-test and pre-test scores as a co-efficient
+s.d <- 3        ## 1 standard deviation = sd
+mu <- 10         ## mean of all scores = mu
+
+
+# Y <- generate_sample(prop_c, prop_pp, N, diff, s.d, mu)
+# 
+# # cross-sectional, independent samples
+# fit.t <- t.test(score ~ time, data = Y[[2]])
+# 
+# # balanced, RM ANOVA, complete-cases only (like SPSS would produce)
+# summary(fit <- aov(score ~ time + Error(id/time) , data = Y[[3]]))
+# 
+# # unbalanced, non-independent, using all available data and REML procedure
+# fit <- lmer(score ~ time + (1|id), data = Y[[1]])
+# coefs <- data.frame(coef(summary(fit)))
+# coefs$p.z <- 2*(1-pnorm(abs(coefs$t.value)))
+# round(coefs, 4)
+
+cohen <- function(scores, x){  # calculates Cohen's d using pooled standard deviation
+  n1 <- length(x[x == 0])
+  n2 <- length(x) - n1
+  s1 <- sd(scores[x == 0])
+  s2 <- sd(scores[x == 1])
+  s  <- sqrt(((n1-1)*s1^2+(n2-1)*s2^2)/(n1+n2-2))
+  d <- abs((mean(scores[x == 0]) - mean(scores[x == 1])) / s)
+  return(d)
+}
+
+diff <- c(1.001, 1.01, 1.025, 1.05, 1.075, 1.1, 1.2, 1.5, 2)
+s.cd <- a.cd <- l.cd <- ttest <- rmanova <- lme <- c()
+
+for(j in 1:length(diff)){
+s.t <- a.t <- l.t <- 0
+n.sim <- 200  
+  for(i in 1:n.sim){
+    Y <- generate_sample(prop_c, prop_pp, N, diff[j], s.d, mu)
+    fit.t <- t.test(score ~ time, data = Y[[2]])
+    s.t <- s.t + (fit.t$p.value <= 0.05)
+  
+    fit.a <- aov(score ~ time + Error(id/time) , data = Y[[3]])
+    a.t <- a.t + (summary(fit.a)[[3]][[1]][5][[1]][1] <= 0.05)
+    
+    fit <- lmer(score ~ time + (1|id), data = Y[[1]])
+    coefs <- data.frame(coef(summary(fit)))
+    coefs$p.z <- 2*(1-pnorm(abs(coefs$t.value)))
+    l.t <- l.t + (coefs$p.z[2] <= 0.05)
+    
+  }
+
+ttest[j] <- s.t/n.sim
+rmanova[j] <- a.t/n.sim
+lme[j] <- l.t/n.sim
+
+
+Y <- generate_sample(prop_c, prop_pp, N*1000, diff[j], s.d, mu)
+s.cd[j] <- cohen(Y[[2]]$score, Y[[2]]$time)
+a.cd[j] <- cohen(Y[[3]]$score, Y[[3]]$time)
+l.cd[j] <- cohen(Y[[1]]$score, Y[[1]]$time)
+}
+df <- data.frame(c(ttest, rmanova, lme), c(s.cd, a.cd, l.cd),
+                 c(rep("t-test", length(diff)), rep("rm-anova",length(diff)), rep("lme", length(diff))))
+names(df) <- c("power", "effect_size", "test")
+```
+
+
+The reality of pre-test/post-test experimental design (particularly if the test is administered on-line) is that you don't always end up with balanced data. Hopefully, most participants will complete both pre-test and post-test, with only a small number completing one or the other but not both. The traditional approach is to discard the incomplete cases and perform a repeated-measures ANOVA or MANOVA. But what are the options if only a small number of participants present complete cases?
+
+One option would be to consider the experiment as cross-sectional with experimental (post-test) and control (pre-test) groups. However, due to the assumption of independence that this imposes, this means discarding the complete cases. Another approach is to use multi-level modelling, where the assumption of indepedence can be relaxed (providing participants can be identified and included as a random effect). This allows us to use the full data-set, improving power.
+
+Here I present the results of a simulation, where the total number of scores is 500. Of these 150 are from complete cases (*i.e* 75 participants), 140 are pre-test scores, and 210 are post-test scores. Three scenarios are presented:
+1. Repeated-measures ANOVA using the 75 complete cases
+2. Between-groups t-test on the pre-test and post-test scores, with the 150 non-independent scores discarded
+3. Multi-level model with all observations included, and a random intercept for participant.
+
+Two-hundred random data-sets were generated for each fixed effect, and power was estimated for each test (being the proportion of significant p-values calculated at the alpha = .05 level). Effect sizes were estimated (Cohen's d) for each sample (even though the experimental effect was known).
+
+```{r, echo = F}
+plot(power ~ effect_size, data = df)
+lines(power ~ effect_size, data = df[df$test == "lme",], col = "green", lwd = 3)
+lines(power ~ effect_size, data = df[df$test == "t-test",], col = "red", lwd = 3)
+lines(power ~ effect_size, data = df[df$test == "rm-anova",], col = "blue", lwd = 3)
+legend("bottomright", c("LME", "t-test", "RM-ANOVA"), lwd = c(3,3,3), col = c("green", "red", "blue"))
+```
