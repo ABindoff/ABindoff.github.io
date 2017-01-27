@@ -1,5 +1,5 @@
 ---
-published: false
+published: true
 title: Consulting a statistician for an a-priori power analysis
 layout: post
 ---
